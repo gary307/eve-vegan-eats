@@ -1,5 +1,6 @@
 import * as React from "react";
 import { graphql } from "gatsby";
+// import Img from "gatsby-image";
 
 // styles
 const pageStyles = {
@@ -128,9 +129,9 @@ const links = [
 
 // markup
 const IndexPage = ({ data }) => {
-  const { edges: articles } = data.allDatoCmsArticle;
-
   console.log({ data });
+
+  const { edges: articles } = data.allDatoCmsArticle;
   return (
     <main style={pageStyles}>
       <title>Articles</title>
@@ -139,7 +140,8 @@ const IndexPage = ({ data }) => {
       <div>
         {articles.map((article) => (
           <div>
-            <h2>{article.title}</h2>
+            <h2>{article.node.title}</h2>
+            <img src={article.node.image.url} />
           </div>
         ))}
       </div>
@@ -150,7 +152,7 @@ const IndexPage = ({ data }) => {
 export default IndexPage;
 
 export const query = graphql`
-  query Home {
+  query Articles {
     allDatoCmsArticle {
       edges {
         node {
