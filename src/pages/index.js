@@ -1,83 +1,7 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-
-// styles
-const pageStyles = {
-  color: "#232129",
-  padding: 96,
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-};
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-};
-const headingAccentStyles = {
-  color: "#663399",
-};
-const paragraphStyles = {
-  marginBottom: 48,
-};
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-};
-const listStyles = {
-  marginBottom: 96,
-  paddingLeft: 0,
-};
-const listItemStyles = {
-  fontWeight: 300,
-  fontSize: 24,
-  maxWidth: 560,
-  marginBottom: 30,
-};
-
-const linkStyle = {
-  color: "#8954A8",
-  fontWeight: "bold",
-  fontSize: 16,
-  verticalAlign: "5%",
-};
-
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  marginBottom: 24,
-};
-
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: 14,
-  marginTop: 10,
-  marginBottom: 0,
-  lineHeight: 1.25,
-};
-
-const docLink = {
-  text: "Documentation",
-  url: "https://www.gatsbyjs.com/docs/",
-  color: "#8954A8",
-};
-
-const badgeStyle = {
-  color: "#fff",
-  backgroundColor: "#088413",
-  border: "1px solid #088413",
-  fontSize: 11,
-  fontWeight: "bold",
-  letterSpacing: 1,
-  borderRadius: 4,
-  padding: "4px 6px",
-  display: "inline-block",
-  position: "relative",
-  top: -2,
-  marginLeft: 10,
-  lineHeight: 1,
-};
+import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 // data
 const links = [
@@ -126,23 +50,117 @@ const links = [
   },
 ];
 
-// markup
+const colors = {
+  orange: "#F27405",
+  green: "#72A603",
+};
+
+//styled components
+const Heading = styled.div`
+  text-align: center;
+  background: ${colors.orange};
+  color: white;
+  font-family: "Corinthia", cursive;
+  padding: 20px;
+`;
+
+const HeadingStyle = styled.h1`
+  font-family: arial;
+  font-size: 60px;
+  font-weight: 100;
+  font-family: "Corinthia", cursive;
+`;
+
+const PageWrapper = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
+`;
+
+const ArticlesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 20px;
+  margin-top: 30px;
+  margin: 40px;
+  margin-bottom: 70px;
+`;
+
+const ArticlesTitle = styled.h2`
+  text-align: center;
+  font-family: "Corinthia", cursive;
+  font-size: 45px;
+  color: ${colors.green};
+`;
+
+const Article = styled.div`
+  width: 100%;
+`;
+
+const ArticleImageWrapper = styled.div`
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border: 4px solid ${colors.green};
+
+  @media (max-width: 568px) {
+    height: 200px;
+  }
+
+  @media (max-width: 368px) {
+    height: 150px;
+  }
+`;
+
+const ArticleImage = styled.img`
+  width: 100%;
+`;
+
+const ArticleTitle = styled.h3`
+  color: #333;
+  font-family: hind;
+  font-size: 20px;
+  margin-bottom: 0px;
+`;
+
+const ArticleCopy = styled.p`
+  margin-top: 3px;
+  font-family: hind;
+  color: #333;
+`;
+
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Corinthia&display=swap');
+  html, body {
+    font-family: arial;
+    margin: 0;
+    padding: 0;
+    color: ${(props) => (props.whiteColor ? "white" : "black")};
+  }
+`;
+
 const IndexPage = ({ data }) => {
   const { edges: articles } = data.allDatoCmsArticle;
 
-  console.log({ data });
   return (
-    <main style={pageStyles}>
-      <title>Articles</title>
-      <h1 style={headingStyles}>Articles</h1>
-
-      <div>
-        {articles.map((article) => (
-          <div>
-            <h2>{article.title}</h2>
-          </div>
-        ))}
-      </div>
+    <main>
+      <GlobalStyle />
+      <Heading>
+        <HeadingStyle>Eve's Vegan Eats</HeadingStyle>
+      </Heading>
+      <PageWrapper>
+        <ArticlesTitle>Latest Recipes</ArticlesTitle>
+        <ArticlesWrapper>
+          {articles.map((article) => (
+            <Article>
+              <ArticleImageWrapper>
+                <ArticleImage src={article.node.image.url} />
+              </ArticleImageWrapper>
+              <ArticleTitle>{article.node.title}</ArticleTitle>
+              <ArticleCopy>{article.node.excerpt}</ArticleCopy>
+            </Article>
+          ))}
+        </ArticlesWrapper>
+      </PageWrapper>
     </main>
   );
 };
@@ -158,6 +176,7 @@ export const query = graphql`
           content {
             value
           }
+          excerpt
           image {
             url
             filename

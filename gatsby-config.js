@@ -20,5 +20,16 @@ module.exports = {
       },
       __key: "pages",
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `corinthia\:400`,
+          `cursive pro\:300,400,400i,700`, // you can also specify font weights and styles
+          `hind`,
+        ],
+        display: "swap",
+      },
+    },
   ],
 };
