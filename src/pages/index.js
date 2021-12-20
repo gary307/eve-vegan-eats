@@ -173,9 +173,6 @@ export const query = graphql`
       edges {
         node {
           title
-          content {
-            value
-          }
           excerpt
           image {
             url
