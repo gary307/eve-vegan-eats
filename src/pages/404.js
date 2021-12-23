@@ -1,54 +1,78 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import * as React from "react";
+import { Link } from "gatsby";
+import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
+
+const colors = {
+  orange: "#F27405",
+  green: "#72A603",
+};
 
 // styles
 const pageStyles = {
   color: "#232129",
-  padding: "96px",
   fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
+};
 
 const paragraphStyles = {
   marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
+};
+
+const Heading = styled.div`
+  text-align: center;
+  background: ${colors.orange};
+  color: white;
+  font-family: "Corinthia", cursive;
+  padding: 20px;
+`;
+
+const HeadingStyle = styled.h1`
+  font-family: arial;
+  font-size: 60px;
+  font-weight: 100;
+  font-family: "Corinthia", cursive;
+`;
+
+const Body = styled.div`
+  text-align: center;
+  margin-top: 50px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Corinthia&display=swap');
+  html, body {
+    font-family: arial;
+    margin: 0;
+    padding: 0;
+    color: ${(props) => (props.whiteColor ? "white" : "black")};
+  }
+`;
 
 // markup
 const NotFoundPage = () => {
   return (
     <main style={pageStyles}>
-      <title>Not found</title>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry{" "}
-        <span role="img" aria-label="Pensive emoji">
-          😔
-        </span>{" "}
-        we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
+      <GlobalStyle />
+      <Heading>
+        <StyledLink to="/">
+          <HeadingStyle>Eve's Vegan Eats</HeadingStyle>
+        </StyledLink>
+      </Heading>
+      <Body style={paragraphStyles}>
+        <h1>404</h1>
+        <h3>
+          Opps, looks like you have gotten lost, click below to get back to the
+          home screen
+        </h3>
         <Link to="/">Go home</Link>.
-      </p>
+      </Body>
     </main>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

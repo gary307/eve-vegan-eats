@@ -6,19 +6,8 @@ exports.createPages = async function ({ actions, graphql }) {
           node {
             slug
             title
-            content
             structuredcontent {
               value
-              blocks {
-                __typename
-                ... on DatoCmsImage {
-                  id
-                  image {
-                    url
-                    alt
-                  }
-                }
-              }
             }
             image {
               url
@@ -35,7 +24,7 @@ exports.createPages = async function ({ actions, graphql }) {
   articles.forEach((edge) => {
     const slug = edge.node.slug;
     actions.createPage({
-      path: `${slug}`,
+      path: `/recipes/${slug}`,
       component: require.resolve(`./src/templates/blog-post.js`),
       context: { edge },
     });

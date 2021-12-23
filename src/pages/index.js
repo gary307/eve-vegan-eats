@@ -2,53 +2,7 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-
-// data
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial/",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-    color: "#E95800",
-  },
-  {
-    text: "How to Guides",
-    url: "https://www.gatsbyjs.com/docs/how-to/",
-    description:
-      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
-    color: "#1099A8",
-  },
-  {
-    text: "Reference Guides",
-    url: "https://www.gatsbyjs.com/docs/reference/",
-    description:
-      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
-    color: "#BC027F",
-  },
-  {
-    text: "Conceptual Guides",
-    url: "https://www.gatsbyjs.com/docs/conceptual/",
-    description:
-      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
-    color: "#0D96F2",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-    color: "#8EB814",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    badge: true,
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-    color: "#663399",
-  },
-];
+import { Link } from "gatsby";
 
 const colors = {
   orange: "#F27405",
@@ -128,6 +82,11 @@ const ArticleCopy = styled.p`
   color: #333;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Corinthia&display=swap');
   html, body {
@@ -145,7 +104,9 @@ const IndexPage = ({ data }) => {
     <main>
       <GlobalStyle />
       <Heading>
-        <HeadingStyle>Eve's Vegan Eats</HeadingStyle>
+        <StyledLink to="/">
+          <HeadingStyle>Eve's Vegan Eats</HeadingStyle>
+        </StyledLink>
       </Heading>
       <PageWrapper>
         <ArticlesTitle>Latest Recipes</ArticlesTitle>
@@ -153,7 +114,9 @@ const IndexPage = ({ data }) => {
           {articles.map((article) => (
             <Article>
               <ArticleImageWrapper>
-                <ArticleImage src={article.node.image.url} />
+                <Link to={`/recipes/${article.node.slug}`}>
+                  <ArticleImage src={article.node.image.url} />
+                </Link>
               </ArticleImageWrapper>
               <ArticleTitle>{article.node.title}</ArticleTitle>
               <ArticleCopy>{article.node.excerpt}</ArticleCopy>
@@ -174,6 +137,7 @@ export const query = graphql`
         node {
           title
           excerpt
+          slug
           image {
             url
             filename
