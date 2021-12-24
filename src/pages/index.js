@@ -76,12 +76,18 @@ const ArticleTitle = styled.h3`
   font-family: hind;
   font-size: 20px;
   margin-bottom: 0px;
+  text-decoration: none;
 `;
 
 const ArticleCopy = styled.p`
   margin-top: 3px;
   font-family: hind;
   color: #333;
+`;
+
+const HeaderStyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
 `;
 
 const StyledLink = styled(Link)`
@@ -106,9 +112,9 @@ const IndexPage = ({ data }) => {
     <main>
       <GlobalStyle />
       <Heading>
-        <StyledLink to="/">
+        <HeaderStyledLink to="/">
           <HeadingStyle>Eve's Vegan Eats</HeadingStyle>
-        </StyledLink>
+        </HeaderStyledLink>
       </Heading>
       <PageWrapper>
         <ArticlesTitle>Latest Recipes</ArticlesTitle>
@@ -116,11 +122,13 @@ const IndexPage = ({ data }) => {
           {articles.map((article) => (
             <Article>
               <ArticleImageWrapper>
-                <Link to={`/recipes/${article.node.slug}`}>
+                <StyledLink to={`/recipes/${article.node.slug}`}>
                   <ArticleImage src={article.node.image.url} />
-                </Link>
+                </StyledLink>
               </ArticleImageWrapper>
-              <ArticleTitle>{article.node.title}</ArticleTitle>
+              <StyledLink to={`/recipes/${article.node.slug}`}>
+                <ArticleTitle>{article.node.title}</ArticleTitle>
+              </StyledLink>
               <ArticleCopy>{article.node.excerpt}</ArticleCopy>
             </Article>
           ))}

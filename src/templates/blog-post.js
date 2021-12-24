@@ -51,7 +51,7 @@ const BlogWrapper = styled.div`
   }
 `;
 
-const StyledLink = styled(Link)`
+const HeaderStyledLink = styled(Link)`
   text-decoration: none;
   color: white;
 `;
@@ -106,9 +106,9 @@ export default function BlogPost({ pageContext }) {
     <div>
       <GlobalStyle />
       <Heading>
-        <StyledLink to="/">
+        <HeaderStyledLink to="/">
           <HeadingStyle>Eve's Vegan Eats</HeadingStyle>
-        </StyledLink>
+        </HeaderStyledLink>
       </Heading>
 
       <BlogWrapper>
