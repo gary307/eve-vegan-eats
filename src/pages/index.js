@@ -23,6 +23,8 @@ const HeadingStyle = styled.h1`
   font-size: 60px;
   font-weight: 100;
   font-family: "Corinthia", cursive;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const PageWrapper = styled.div`

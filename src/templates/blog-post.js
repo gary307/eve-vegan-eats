@@ -22,6 +22,8 @@ const HeadingStyle = styled.h1`
   font-size: 60px;
   font-weight: 100;
   font-family: "Corinthia", cursive;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const BlogWrapper = styled.div`
@@ -30,6 +32,7 @@ const BlogWrapper = styled.div`
   margin: 0 auto;
   margin-bottom: 70px;
   padding: 30px;
+  padding-top: 0;
   box-sizing: border-box;
 
   img {
@@ -56,9 +59,11 @@ const StyledLink = styled(Link)`
 const ArticleTitle = styled.h1`
   text-align: center;
   font-family: "Corinthia", cursive;
-  font-size: 45px;
-  margin-bottom: 20px;
+  font-size: 50px;
+  margin-top: 40px;
+  margin-bottom: 30px;
   color: #333;
+  color: ${colors.green};
 `;
 
 const StyledImg = styled.img`
@@ -75,21 +80,22 @@ const ArticleContent = styled.div`
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Corinthia&display=swap');
   html, body {
-    font-family: arial;
+    font-family: hind;
     margin: 0;
     padding: 0;
-    color: ${(props) => (props.whiteColor ? "white" : "black")};
+    color: #333;
   }
 
-  h1, h2, h3 {
-    font-family: hind;
-    margin-bottom: 0px;
+  h2 {
+    margin-top: 40px;
   }
 
   p {
     margin-top: 3px;
-    font-family: hind;
-    color: #333;
+  }
+
+  ul {
+    line-height 18px;
   }
 `;
 
