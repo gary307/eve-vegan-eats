@@ -119,7 +119,7 @@ const IndexPage = ({ data }) => {
       <PageWrapper>
         <ArticlesTitle>Latest Recipes</ArticlesTitle>
         <ArticlesWrapper>
-          {articles.map((article) => (
+          {articles.reverse().map((article) => (
             <Article>
               <ArticleImageWrapper>
                 <StyledLink to={`/recipes/${article.node.slug}`}>
